@@ -1,0 +1,36 @@
+{
+  "phases": [
+    {
+      "routes": [
+        {
+          "path": "/meter/1/read",
+          "headers": {
+            "content-type": "application/octet-stream"
+          },
+          "base64": "aBYWaAgBcnhWNBItLAEEBQAAAAQDeDcAAB/HFg=="
+        },
+        {
+          "path": "/meter/1/next?fcb=1",
+          "headers": {
+            "content-type": "application/octet-stream"
+          },
+          "base64": "aBYWaAgBcnhWNBItLAEEBQAAAAQDLAEAAA81Fg=="
+        },
+        {
+          "path": "/meter/1/next?fcb=0",
+          "headers": {
+            "content-type": "application/octet-stream"
+          },
+          "base64": "aBYWaAgBcnhWNBItLAEEBQAAAAQDeDcAAB/HFg=="
+        },
+        {
+          "path": "/meter/1/identity",
+          "headers": {
+            "content-type": "application/json"
+          },
+          "body": "{\"primaryAddress\": 1, \"secondaryAddress\": \"12345678-2c2d-1-4\", \"accessNumber\": 5}"
+        }
+      ]
+    }
+  ]
+}
