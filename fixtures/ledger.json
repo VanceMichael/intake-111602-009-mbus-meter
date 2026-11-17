@@ -1,0 +1,58 @@
+{
+  "phases": [
+    {
+      "routes": [],
+      "meters": {
+        "2": {
+          "identity": "11223344-2c2d-1-2",
+          "frames": [
+            "aCMjaAgBckQzIhEtLAECIQAAAAQGOTAAAEQG+CoAAIQQBlkBAAAflBY=",
+            "aCYmaAgBckQzIhEtLAECIQAAAAQTBhIPAAwGeFY08gF/KgSDfwkDAAAfwRY=",
+            "aCQkaAgBckQzIhEtLAECIQAAAAQraBAAAAJaigIFAwAAwD8P3q2+738W"
+          ]
+        },
+        "3": {
+          "identity": "99999999-2c2d-1-2",
+          "frames": [
+            "aBYWaAgBcpmZmZktLAECAQAAAAQGAQAAAB9mFg=="
+          ]
+        },
+        "4": {
+          "identity": "22222222-2c2d-1-2",
+          "dropOnce": true,
+          "frames": [
+            "aBYWaAgBciIiIiItLAECBwAAAAQGZAAAAB/zFg==",
+            "aBYWaAgBciIiIiItLAECBwAAAAQGyAAAAA9HFg=="
+          ]
+        },
+        "5": {
+          "identity": "33333333-2c2d-1-2",
+          "frames": [
+            "aBYWaAgBcjMzMzMtLAECAQAAAAQGCgAAAB/XFg==",
+            "aBYWaAgBckREREQtLAECAQAAAAQGFAAAAA8VFg=="
+          ]
+        }
+      }
+    },
+    {
+      "routes": [],
+      "meters": {
+        "2": {
+          "identity": "55667788-2c2d-1-2",
+          "frames": [
+            "aBYWaAgBcoh3ZlUtLAECEAAAAAQGMgAAAB/8Fg==",
+            "aBYWaAgBcoh3ZlUtLAECEAAAAAQGPAAAAA/2Fg=="
+          ]
+        },
+        "4": {
+          "identity": "77777777-2c2d-1-2",
+          "dropOnce": true,
+          "frames": [
+            "aBYWaAgBcnd3d3ctLAECBwAAAAQGvAIAAB+hFg==",
+            "aBYWaAgBcnd3d3ctLAECBwAAAAQGIAMAAA/2Fg=="
+          ]
+        }
+      }
+    }
+  ]
+}

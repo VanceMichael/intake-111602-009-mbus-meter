@@ -21,7 +21,7 @@ export async function startSource({ scenario = 'ordinary', port = 0 } = {}) {
         for await (const chunk of request) chunks.push(chunk);
         const input = JSON.parse(Buffer.concat(chunks));
         if (input.action === 'advance') phase = Math.min(phase + 1, config.phases.length - 1);
-        else if (input.action === 'reset') { phase = 0; requests.length = 0; }
+        else if (input.action === 'reset') { phase = 0; requests.length = 0; for (const key of Object.keys(domainState)) delete domainState[key]; }
         else if (input.action !== 'inspect') throw new Error('未知的来源操作');
         response.setHeader('content-type', 'application/json');
         return response.end(JSON.stringify({ phase, requests }));
@@ -29,7 +29,7 @@ export async function startSource({ scenario = 'ordinary', port = 0 } = {}) {
       const routes = config.phases[phase].routes;
       const url = new URL(path, 'http://localhost');
       const canonical = value => { const parsed = new URL(value, 'http://localhost'); parsed.searchParams.sort(); return parsed.pathname + parsed.search; };
-      let route = await dispatch({ url, method: request.method, phase, state: domainState, headers: request.headers });
+      let route = await dispatch({ url, method: request.method, phase, state: domainState, headers: request.headers, config: config.phases[phase] });
       if (!route) route = routes.find(item => canonical(item.path) === canonical(path) && (item.method || 'GET') === request.method);
       if (route?.json !== undefined) route = { ...route, body: JSON.stringify(route.json), headers: { 'content-type': 'application/json', ...route.headers } };
       requests.push({ path, phase, method: request.method,

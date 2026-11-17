@@ -1,19 +1,20 @@
+import { parseFrame } from './mbus.mjs';
+
+// 单帧预览：身份（识别号/厂家/版本/介质）、访问号、记录列表、续帧标记。
+// 记录带当时的定义（DIF/VIF 原文、存储号、费率、单位），未理解的只留原字节。
 export function decode(bytes) {
-  if (bytes.length < 21 || bytes[0] !== 0x68 || bytes[3] !== 0x68 || bytes[1] !== bytes[2] || bytes.length !== bytes[1] + 6 || bytes.at(-1) !== 0x16) throw new Error('不是完整 M-Bus 长帧');
-  const body = bytes.subarray(4, -2);
-  if ((body.reduce((sum, item) => sum + item, 0) & 255) !== bytes.at(-2)) throw new Error('帧校验和错误');
-  if (body[2] !== 0x72) throw new Error('不支持此响应结构');
-  const identification = [...body.subarray(3, 7)].reverse().map(item => item.toString(16).padStart(2, '0')).join('');
-  const records = [];
-  let offset = 15;
-  let more = false;
-  while (offset < body.length) {
-    const dif = body[offset++];
-    if (dif === 0x1f) { more = true; break; }
-    if (dif === 0x0f) break;
-    const vif = body[offset++];
-    if ((dif & 15) !== 4 || offset + 4 > body.length) throw new Error('当前预览不支持此记录长度');
-    records.push({ dif, vif, raw: body.readInt32LE(offset) }); offset += 4;
-  }
-  return { address: body[1], identification, access: body[11], records, more };
+  const frame = parseFrame(bytes);
+  return {
+    address: frame.address,
+    identification: frame.identity.identification,
+    manufacturer: frame.identity.manufacturer,
+    manufacturerCode: frame.identity.manufacturerCode,
+    version: frame.identity.version,
+    medium: frame.identity.medium,
+    identity: frame.identity.key,
+    access: frame.access,
+    records: frame.records,
+    more: frame.more,
+    manufacturerTail: frame.manufacturerTail,
+  };
 }

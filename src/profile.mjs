@@ -4,8 +4,14 @@ export const profile = {
   "previewKeys": [
     "address",
     "identification",
+    "manufacturer",
+    "manufacturerCode",
+    "version",
+    "medium",
+    "identity",
     "access",
     "records",
-    "more"
+    "more",
+    "manufacturerTail"
   ]
 };
